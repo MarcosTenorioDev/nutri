@@ -1,0 +1,11 @@
+{
+    "navbar":{
+        "NUTRI" : "NUTRI.IO",
+        "nutri" : "Nutri.io",
+        "myDiets":"Minhas dietas",
+        "myRecipes": "Minhas Receitas",
+        "home": "Home",
+        "login" : "Entrar",
+        "register" : "Registrar-se"
+    }
+}

@@ -2,10 +2,11 @@
 module.exports = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+    "./node_modules/flowbite/**/*.js"
   ],
   prefix: "",
   theme: {
@@ -73,10 +74,10 @@ module.exports = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
-    fontFamily:{
-      'primary': ['Poppins', 'sans-serif'],
-      'secondary': ['Inter', 'sans-serif']
-    }
+    fontFamily: {
+      primary: ["Poppins", "sans-serif"],
+      secondary: ["Inter", "sans-serif"],
+    },
   },
-  plugins: [require("tailwindcss-animate")],
-}
+  plugins: [require("tailwindcss-animate"), require("flowbite/plugin")],
+};
