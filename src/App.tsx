@@ -10,7 +10,7 @@ function App() {
 
 
   return (
-    <>
+    <div className="bg-nutriBlue min-h-screen">
       <NavBar/>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -24,7 +24,7 @@ function App() {
           element={<SignUp redirectUrl={"/"} routing="path" path="/sign-up" />}
         />
       </Routes>
-    </>
+    </div>
   );
 }
 
