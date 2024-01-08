@@ -12,7 +12,6 @@ import { useState } from "react";
 
 const NavBar = () => {
   const [navOpen, setNavOpen] = useState(false);
-  console.log(navOpen);
 
   return (
     <>
