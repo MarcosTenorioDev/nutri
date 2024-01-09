@@ -31,6 +31,10 @@
     --radius: 0.5rem;
   }
 
+  .bg-custom-green-opacity {
+    background-color: rgba(3, 166, 90, 0.20);
+  }
+
 }
 
  
