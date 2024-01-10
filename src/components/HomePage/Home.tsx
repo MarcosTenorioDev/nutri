@@ -2,6 +2,7 @@ import food from "../../assets/images/homeFood.png";
 import ChatMessages from "../chatBot/chatMessages";
 import { Button } from "../ui/button";
 import { ArrowLeftIcon, CameraIcon } from "@heroicons/react/24/outline"
+import foodFreezer from '../../assets/images/foodInFreezer.png'
 
 const Home = () => {
   return (
@@ -33,7 +34,7 @@ const Home = () => {
             refeições, tirar dúvidas de nutrição de dietas.
           </h2>
 
-          <div className="border-primary bg-nutriBlue w-72 h-96 rounded-t-lg relative">
+          <div className="border-primary border-[1px] bg-nutriBlue w-72 h-[490px] rounded-lg relative">
             <div className="bg-primary w-full p-2 flex items-center text-white rounded-t-lg ">
               {" "}
               <ArrowLeftIcon className="text-white w-4" />{" "}
@@ -43,11 +44,12 @@ const Home = () => {
             </div>
             <div className="p-4 flex flex-col gap-4">
               <ChatMessages
-                messageBaloon="testeasda asd asd dsdsdss  a a sdas saasasad dasd sadasdsd ss s"
+                messageBaloon="Olá, sou o nutri.helper! a IA que vai tirar todas as suas dúvidas em relação a sua alimentação!"
                 role="system"
               />
               <ChatMessages
-                messageBaloon="testeasda asd asd dsdsdss  a a sdas saasasad dasd sadasdsd ss s"
+              foodChat={foodFreezer}
+                messageBaloon="Hoje, quero variar minha dieta. Sugere uma refeição com esses ingredientes alinhada aos objetivos da minha dieta atual? Segue a imagem dos ingredientes da minha geladeira :"
                 role="user"
               />
             </div>
@@ -57,7 +59,7 @@ const Home = () => {
                 disabled={true}
                 placeholder="Digite aqui..."
               />
-              <Button size={"sm"} className="rounded-xl pointer-events-none">
+              <Button size={"sm"} className="rounded-2xl pointer-events-none h-6 text-[10px]">
                 enviar
               </Button>
               <CameraIcon className="absolute top-[18px] right-[85px] w-4 text-[#5A6D77]" />
