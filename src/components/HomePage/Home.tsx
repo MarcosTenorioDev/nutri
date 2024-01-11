@@ -71,7 +71,7 @@ const Home = () => {
             e muito mais...
           </h2>
 
-          <div className="border-primary border-[1px] bg-nutriBlue w-72 h-[600px] rounded-lg relative my-8 overflow-hidden">
+          <div className="border-primary border-[1px] bg-nutriBlue w-72 h-[720px] rounded-lg relative my-8 overflow-hidden">
             <div className="bg-primary w-full p-2 flex items-center text-white">
               {" "}
               <ArrowLeftIcon className="text-white w-4" />{" "}
@@ -82,11 +82,7 @@ const Home = () => {
             <div className="p-4 flex flex-col gap-4">
               <ChatMessages
               foodChat={foodResult}
-                messageBaloon={`Claro! ficarei feliz em ajudar a criar uma refeição variada com os ingredientes indentificados ! Entrada: Salada de folhas verdes com cenouras, tomates e pepinos. Prato principal: Frango grelhado (200g) com arroz integral (1 xícara) e legumes assados 
-                (1 xícara). Sobremesa: 2 unidades de Fruta fresca (por exemplo, banana, maçã ou manga).  Total :
-                Carboidratos: 105 gramas
-                Proteínas: 41 gramas
-                Calorias: 550`}
+                messageBaloon={`Claro! ficarei feliz em ajudar a criar uma refeição variada com os ingredientes indentificados ! \n Entrada: Salada de folhas verdes com cenouras, tomates e pepinos. \n Prato principal: Frango grelhado (200g) com arroz integral (1 xícara) e legumes assados (1 xícara). \nSobremesa: 2 unidades de Fruta fresca (por exemplo, banana, maçã ou manga).  \n Total: \nCarboidratos: 105 gramas Proteínas: 41 gramas Calorias: 550`}
                 role="system"
               />
             </div>
