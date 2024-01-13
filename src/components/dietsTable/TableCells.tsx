@@ -1,6 +1,6 @@
 const TableHeadCell = (props : any) => {
   return (
-    <th className={`${props.className}`}>{props.children}</th>
+    <th className={`md:p-2 ${props.className}`}>{props.children}</th>
   )
 }
 

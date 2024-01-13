@@ -7,10 +7,110 @@ import foodResult from "../../assets/images/foodResult.png";
 import DietTable from "../dietsTable/dietsTable";
 
 const Home = () => {
+  const jsonExample = {
+    Nome: "Marcos",
+    Objetivo: "Ganho de massa muscular",
+    IngestaoDiaria: {
+      Proteina: "200g",
+      Carboidratos: "400g",
+      Calorias: "3500Kcal",
+    },
+    Refeicoes: [
+      {
+        Dia: "Segunda-feira",
+        CafeDaManha:
+          "4 ovos mexidos com espinafre + 1 xícara de aveia com banana + 200ml de suco de laranja",
+        LancheDaManha: "1 maçã + 30g de amêndoas",
+        Almoco:
+          "200g de peito de frango grelhado + 1 xícara de quinoa + legumes cozidos",
+        LancheDaTarde: "1 batata-doce média assada + 150g de peito de peru",
+        Jantar:
+          "250g de salmão grelhado + 1 xícara de arroz integral + salada de folhas verdes",
+        Ceia: "1 copo de leite de amêndoas + 30g de whey protein",
+      },
+      {
+        Dia: "Terça-feira",
+        CafeDaManha:
+          "2 bananas amassadas com aveia e mel + 4 claras de ovo cozidas + 200ml de suco de uva",
+        LancheDaManha: "1 pera + 30g de nozes",
+        Almoco:
+          "250g de carne vermelha magra grelhada + 1 xícara de arroz branco + brócolis cozidos",
+        LancheDaTarde:
+          "1 batata-doce média cozida + 150g de peito de frango desfiado",
+        Jantar:
+          "300g de tilápia assada + 1 xícara de quinoa + salada de tomate e pepino",
+        Ceia: "1 copo de iogurte sem lactose + 30g de whey protein",
+      },
+      {
+        Dia: "Quarta-feira",
+        CafeDaManha:
+          "omelete de 3 ovos com queijo sem lactose e espinafre + 1 xícara de aveia com morangos + 200ml de suco de abacaxi",
+        LancheDaManha: "1 maçã + 30g de amêndoas",
+        Almoco:
+          "200g de peito de frango grelhado + 1 xícara de quinoa + legumes cozidos",
+        LancheDaTarde: "1 banana + 30g de castanhas",
+        Jantar:
+          "250g de salmão grelhado + 1 xícara de arroz integral + salada de folhas verdes",
+        Ceia: "1 copo de leite de amêndoas + 30g de whey protein",
+      },
+      {
+        Dia: "Quinta-feira",
+        CafeDaManha:
+          "2 bananas amassadas com aveia e mel + 4 claras de ovo cozidas + 200ml de suco de uva",
+        LancheDaManha: "1 pera + 30g de nozes",
+        Almoco:
+          "250g de carne vermelha magra grelhada + 1 xícara de arroz branco + brócolis cozidos",
+        LancheDaTarde:
+          "1 batata-doce média cozida + 150g de peito de frango desfiado",
+        Jantar:
+          "300g de tilápia assada + 1 xícara de quinoa + salada de tomate e pepino",
+        Ceia: "1 copo de iogurte sem lactose + 30g de whey protein",
+      },
+      {
+        Dia: "Sexta-feira",
+        CafeDaManha:
+          "4 ovos mexidos com espinafre + 1 xícara de aveia com banana + 200ml de suco de laranja",
+        LancheDaManha: "1 maçã + 30g de amêndoas",
+        Almoco:
+          "200g de peito de frango grelhado + 1 xícara de quinoa + legumes cozidos",
+        LancheDaTarde: "1 batata-doce média assada + 150g de peito de peru",
+        Jantar:
+          "250g de salmão grelhado + 1 xícara de arroz integral + salada de folhas verdes",
+        Ceia: "1 copo de leite de amêndoas + 30g de whey protein",
+      },
+      {
+        Dia: "Sábado",
+        CafeDaManha:
+          "omelete de 3 ovos com queijo sem lactose e espinafre + 1 xícara de aveia com morangos + 200ml de suco de abacaxi",
+        LancheDaManha: "1 maçã + 30g de amêndoas",
+        Almoco:
+          "250g de carne vermelha magra grelhada + 1 xícara de arroz branco + brócolis cozidos",
+        LancheDaTarde: "1 banana + 30g de castanhas",
+        Jantar:
+          "300g de tilápia assada + 1 xícara de quinoa + salada de tomate e pepino",
+        Ceia: "1 copo de leite de amêndoas + 30g de whey protein",
+      },
+      {
+        Dia: "Domingo",
+        CafeDaManha:
+          "2 bananas amassadas com aveia e mel + 4 claras de ovo cozidas + 200ml de suco de uva",
+        LancheDaManha: "1 pera + 30g de nozes",
+        Almoco:
+          "250g de carne vermelha magra grelhada + 1 xícara de arroz branco + brócolis cozidos",
+        LancheDaTarde:
+          "1 batata-doce média cozida + 150g de peito de frango desfiado",
+        Jantar:
+          "300g de tilápia assada + 1 xícara de quinoa + salada de tomate e pepino",
+        Ceia: "1 copo de iogurte sem lactose + 30g de whey protein",
+      },
+    ],
+    InformacoesAdicionais:
+      "Certifique-se de beber bastante água ao longo do dia e ajuste as porções conforme a resposta do seu corpo ao longo do tempo. Consulte um nutricionista regularmente para otimizar a dieta.",
+  };
   
   return (
     <>
-      <div className="flex flex-col items-center px-4 py-8 gap-4 max-w-7xl mx-auto sm:items-start sm:justify-start sm:py-24 mb-11 md:px-8">
+      <div className="flex flex-col items-center px-4 py-8 gap-4 max-w-7xl mx-auto sm:items-start sm:justify-start sm:py-24 mb-11 md:px-8 md:py-44">
         <div className="flex flex-col items-center sm:flex-row gap-4 sm:justify-between sm:items-start w-full">
           <img
             src={food}
@@ -26,7 +126,7 @@ const Home = () => {
             </h2>
           </div>
         </div>
-        <Button variant={"default"} className="w-40 p-5 text-md rounded-lg">
+        <Button variant={"default"} className="w-40 p-5 text-md rounded-lg lg:p-7 lg:text-xl">
           Gerar dieta
         </Button>
       </div>
@@ -44,7 +144,7 @@ const Home = () => {
           nutri.io !
         </h2>
 
-        <DietTable />
+        <DietTable jsonExample={jsonExample}/>
       </div>
 
 
