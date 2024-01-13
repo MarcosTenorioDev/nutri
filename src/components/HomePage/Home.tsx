@@ -4,8 +4,10 @@ import { Button } from "../ui/button";
 import { ArrowLeftIcon, CameraIcon } from "@heroicons/react/24/outline";
 import foodFreezer from "../../assets/images/foodInFreezer.png";
 import foodResult from "../../assets/images/foodResult.png";
+import DietTable from "../dietsTable/dietsTable";
 
 const Home = () => {
+  
   return (
     <>
       <div className="flex flex-col items-center px-4 py-8 gap-4 max-w-7xl mx-auto sm:items-start sm:justify-start sm:py-24 mb-11 md:px-8">
@@ -28,6 +30,31 @@ const Home = () => {
           Gerar dieta
         </Button>
       </div>
+
+
+
+
+
+
+
+      <div className="px-4 mb-10">
+        <h2 className="text-[#525252] font-bold text-base text-center md:text-2xl mb-6">
+          Junte-se a mais de 1.000 usuários e crie suas dieta personalizadas com
+          direito a receitas saborosas - Atinja agora seus objetivos com
+          nutri.io !
+        </h2>
+
+        <DietTable />
+      </div>
+
+
+
+
+
+
+
+
+
 
       <div className="bg-opacity-20 min-h-screen w-screen bg bg-custom-green-opacity py-12 px-4">
         <div className="max-w-7xl mx-auto flex items-center md:justify-center md:items-center flex-col">
@@ -73,13 +100,9 @@ const Home = () => {
               </div>
             </div>
 
-
-
             <h2 className="text-[#525252] font-bold text-base text-center md:hidden">
               e muito mais...
             </h2>
-
-
 
             <div className="border-primary border-[1px] bg-nutriBlue w-72 h-[720px] rounded-lg relative my-8 overflow-hidden lg:w-96 lg:h-[940px]">
               <div className="bg-primary w-full p-2 flex items-center text-white">
