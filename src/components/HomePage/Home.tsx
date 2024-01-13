@@ -8,7 +8,7 @@ import foodResult from "../../assets/images/foodResult.png";
 const Home = () => {
   return (
     <>
-      <div className="flex flex-col items-center px-4 py-8 gap-4 max-w-7xl mx-auto sm:items-start sm:justify-start sm:py-24 mb-11">
+      <div className="flex flex-col items-center px-4 py-8 gap-4 max-w-7xl mx-auto sm:items-start sm:justify-start sm:py-24 mb-11 md:px-8">
         <div className="flex flex-col items-center sm:flex-row gap-4 sm:justify-between sm:items-start w-full">
           <img
             src={food}
@@ -31,18 +31,18 @@ const Home = () => {
 
       <div className="bg-opacity-20 min-h-screen w-screen bg bg-custom-green-opacity py-12 px-4">
         <div className="max-w-7xl mx-auto flex items-center md:justify-center md:items-center flex-col">
-          <h2 className="text-[#525252] font-bold text-base text-center">
+          <h2 className="text-[#525252] font-bold text-base text-center md:text-2xl">
             Conte com um chat 24hrs para te auxiliar a diversificar suas
             refeições, tirar dúvidas de nutrição de dietas{" "}
             <span className="hidden md:block">e muito mais...</span>
           </h2>
 
           <div className="flex flex-col md:gap-36 md:flex-row">
-            <div className="border-primary border-[1px] bg-nutriBlue w-72 h-[490px] rounded-lg relative my-8 overflow-hidden">
+            <div className="border-primary border-[1px] bg-nutriBlue w-72 h-[490px] rounded-lg relative my-8 overflow-hidden lg:w-96 lg:h-[620px]">
               <div className="bg-primary w-full p-2 flex items-center text-white">
                 {" "}
-                <ArrowLeftIcon className="text-white w-4" />{" "}
-                <h4 className="w-full flex justify-center pr-4 text-sm">
+                <ArrowLeftIcon className="text-white w-4 lg:w-6" />{" "}
+                <h4 className="w-full flex justify-center pr-4 text-sm lg:text-lg">
                   nutri.helper
                 </h4>
               </div>
@@ -53,33 +53,39 @@ const Home = () => {
                 />
                 <ChatMessages
                   foodChat={foodFreezer}
-                  messageBaloon="Hoje, quero variar minha dieta. Sugere uma refeição com esses ingredientes alinhada aos objetivos da minha dieta atual? Segue a imagem dos ingredientes da minha geladeira :"
+                  messageBaloon="Hoje, quero variar minha dieta. Sugere uma refeição com esses ingredientes alinhada aos objetivos da minha dieta atual? Segue a imagem dos ingredientes da minha geladeira: "
                   role="user"
                 />
               </div>
-              <div className="absolute bottom-0 w-full px-2 py-3 flex items-center justify-between">
+              <div className="absolute bottom-0 w-full px-2 py-3 flex items-center justify-between lg:px-4">
                 <input
-                  className="bg-white h-11 w-9/12 border-[1px] border-primary rounded-xl text-[9px] pb-4 pl-1"
+                  className="bg-white h-11 w-9/12 border-[1px] border-primary rounded-xl text-[9px] pb-4 pl-1 lg:h-16 lg:text-sm lg:pb-6"
                   disabled={true}
                   placeholder="Digite aqui..."
                 />
                 <Button
                   size={"sm"}
-                  className="rounded-2xl pointer-events-none h-6 text-[10px]"
+                  className="rounded-2xl pointer-events-none h-6 text-[10px] lg:p-4 lg:text-base"
                 >
                   enviar
                 </Button>
-                <CameraIcon className="absolute top-[18px] right-[85px] w-4 text-[#5A6D77]" />
+                <CameraIcon className="absolute top-[18px] right-[85px] w-4 text-[#5A6D77] lg:top-[20px] lg:right-[110px] lg:w-5" />
               </div>
             </div>
+
+
+
             <h2 className="text-[#525252] font-bold text-base text-center md:hidden">
               e muito mais...
             </h2>
-            <div className="border-primary border-[1px] bg-nutriBlue w-72 h-[720px] rounded-lg relative my-8 overflow-hidden">
+
+
+
+            <div className="border-primary border-[1px] bg-nutriBlue w-72 h-[720px] rounded-lg relative my-8 overflow-hidden lg:w-96 lg:h-[940px]">
               <div className="bg-primary w-full p-2 flex items-center text-white">
                 {" "}
-                <ArrowLeftIcon className="text-white w-4" />{" "}
-                <h4 className="w-full flex justify-center pr-4 text-sm">
+                <ArrowLeftIcon className="text-white w-4 lg:w-6" />{" "}
+                <h4 className="w-full flex justify-center pr-4 text-sm lg:text-lg">
                   nutri.helper
                 </h4>
               </div>
@@ -90,19 +96,19 @@ const Home = () => {
                   role="system"
                 />
               </div>
-              <div className="absolute bottom-0 w-full px-2 py-3 flex items-center justify-between">
+              <div className="absolute bottom-0 w-full px-2 py-3 flex items-center justify-between lg:px-4">
                 <input
-                  className="bg-white h-11 w-9/12 border-[1px] border-primary rounded-xl text-[9px] pb-4 pl-1"
+                  className="bg-white h-11 w-9/12 border-[1px] border-primary rounded-xl text-[9px] pb-4 pl-1 lg:h-16 lg:text-sm lg:pb-6"
                   disabled={true}
                   placeholder="Digite aqui..."
                 />
                 <Button
                   size={"sm"}
-                  className="rounded-2xl pointer-events-none h-6 text-[10px]"
+                  className="rounded-2xl pointer-events-none h-6 text-[10px] lg:p-4 lg:text-base"
                 >
                   enviar
                 </Button>
-                <CameraIcon className="absolute top-[18px] right-[85px] w-4 text-[#5A6D77]" />
+                <CameraIcon className="absolute top-[18px] right-[85px] w-4 text-[#5A6D77] lg:top-[20px] lg:right-[110px] lg:w-5" />
               </div>
             </div>
           </div>
