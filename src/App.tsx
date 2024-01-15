@@ -1,8 +1,8 @@
 import { SignIn, SignUp } from "@clerk/clerk-react";
 import { Routes, Route } from "react-router-dom";
-import Diets from "./components/DietsPage/Diets";
 import NavBar from "./components/NavBar";
 import Home from "./components/HomePage/Home";
+import DietsPage from "./components/DietsPage/DietsPage";
 
 function App() {
 
@@ -14,7 +14,7 @@ function App() {
       <NavBar/>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/diets" element={<Diets />} />
+        <Route path="/diets" element={<DietsPage />} />
         <Route
           path="/sign-in/*"
           element={<SignIn redirectUrl={"/"} routing="path" path="/sign-in" />}

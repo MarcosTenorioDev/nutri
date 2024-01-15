@@ -118,10 +118,10 @@ const Home = () => {
             className="w-44 sm:order-1 sm:w-4/12 sm:max-w-80 sm:min-w-72 rounded-full shadow-2xl"
           />
           <div className="flex flex-col gap-4 h-full sm:pt-10 sm:max-w-96 md:max-w-xl lg:max-w-2xl">
-            <h1 className="text-2xl font-bold font-primary text-center sm:text-start sm:text-4xl lg:text-5xl">
+            <h1 className="text-2xl font-bold font-primary text-center sm:text-start sm:text-4xl lg:text-5xl textPurple">
               Faça sua dieta completa em menos de 2 minutos com o nutri.io!
             </h1>
-            <h2 className="text-center text-lg font-light text-muted-foreground sm:text-start sm:text-2xl font-primary sm:tracking-wide lg:text-3xl">
+            <h2 className="text-center text-lg font-light textPurple sm:text-start sm:text-2xl font-primary sm:tracking-wide lg:text-3xl opacity-80">
               Sua dieta, da forma personalizada com a sua cara!
             </h2>
           </div>
@@ -138,7 +138,7 @@ const Home = () => {
 
 
       <div className="px-4 mb-10">
-        <h2 className="text-[#525252] font-bold text-base text-center md:text-2xl mb-6">
+        <h2 className="text-[#525252] font-bold text-base text-center md:text-2xl mb-6 max-w-7xl mx-auto lg:mb-16">
           Junte-se a mais de 1.000 usuários e crie suas dieta personalizadas com
           direito a receitas saborosas - Atinja agora seus objetivos com
           nutri.io !
@@ -153,12 +153,12 @@ const Home = () => {
 
 
 
-
+{/* Faltar adicionar sombra nos componentes de chat e dietTable */}
 
 
       <div className="bg-opacity-20 min-h-screen w-screen bg bg-custom-green-opacity py-12 px-4">
         <div className="max-w-7xl mx-auto flex items-center md:justify-center md:items-center flex-col">
-          <h2 className="text-[#525252] font-bold text-base text-center md:text-2xl">
+          <h2 className="font-bold text-base text-center md:text-2xl textPurple opacity-70 ">
             Conte com um chat 24hrs para te auxiliar a diversificar suas
             refeições, tirar dúvidas de nutrição de dietas{" "}
             <span className="hidden md:block">e muito mais...</span>
@@ -236,6 +236,13 @@ const Home = () => {
             </div>
           </div>
         </div>
+      </div>
+
+
+
+      <div className="py-10 max-w-7xl mx-auto">
+        <h2 className="font-primary text-3xl textPurple font-bold">Planos e Preços</h2>
+        <p className="font-primary textPurple opacity-70">Veja agora os melhores planos para o seu objetivo !</p>
       </div>
     </>
   );

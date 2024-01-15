@@ -24,9 +24,9 @@ const DietTable = (props: any) => {
           {text.replace("-span-", `${dietData.Nome}`)}
         </h3>
       </div>
-      <div className="border-2 border-primary overflow-scroll max-h-72 mx-auto md:max-h-max xl:border-0">
+      <div className="border-2 border-primary overflow-scroll max-h-72 mx-auto md:max-h-max xl:border-0 xl:max-w-[95%]">
         <table className="border-4 border-primary bg-white w-10/12 md:w-full">
-          <thead className="bg-primary text-white">
+          <thead className="bg-primary text-white customThead">
             <tr>
               <TableHeadCell>Dia</TableHeadCell>
               <TableHeadCell>Café da manhã</TableHeadCell>

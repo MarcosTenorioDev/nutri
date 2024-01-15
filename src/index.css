@@ -31,9 +31,21 @@
     --radius: 0.5rem;
   }
 
+  .textPurple{
+    color: #100A38;
+  }
+
   .bg-custom-green-opacity {
     background-color: rgba(3, 166, 90, 0.20);
   }
+
+  .customThead{
+    background: black;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    border: 2px solid red;
+}
 
 }
 
