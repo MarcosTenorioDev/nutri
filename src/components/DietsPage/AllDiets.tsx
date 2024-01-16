@@ -47,34 +47,34 @@ const AllDiets = () => {
     },
   ];
   return (
-    <div className="w-full border-[1px] max-w-6xl mx-auto bg-white p-4 flex flex-col gap-4">
+    <div className="w-full border-[1px] max-w-6xl mx-auto bg-white p-4 sm:p-6 flex flex-col gap-4 rounded-xl shadow-2xl lg:p-10">
       <div className="flex justify-between items-center">
-        <h2 className="text-sm font-primary">minhas dietas</h2>
+        <h2 className="text-base font-primary font-semibold textPurple sm:text-xl lg:text-2xl ">Minhas dietas</h2>
         <Button variant={"default"} className="flex items-center gap-2 text-sm">
-          Nova dieta <PlusIcon className="w-5" />
+          Criar dieta <PlusIcon className="w-5" />
         </Button>
       </div>
-      <div className="overflow-auto">
-        <table className="mx-auto w-full flex flex-col gap-10">
-          <thead>
-            <tr className="text-xs [&>*]:min-w-32 [&>*]:p-4 [&>*]:w-44 [&>*]:font-primary [&>*]:textPurple opacity-50 w-full flex justify-between items-center">
-              <TableHeadCell className="rounded-l-xl">Nome</TableHeadCell>
+      <div className="overflow-scroll w-full bg-[]">
+        <table className=" w-full flex flex-col gap-4">
+          <thead className="w-max bg-[#F3F6F9] rounded-xl xl:w-full">
+            <tr className="text-sm [&>*]:min-w-32 [&>*]:p-4  [&>*]:w-44 [&>*]:whitespace-nowrap [&>*]:font-primary [&>*]:textPurple opacity-50 w-full flex justify-between items-center">
+              <TableHeadCell>Nome</TableHeadCell>
               <TableHeadCell>Kcal diárias</TableHeadCell>
               <TableHeadCell>Proteínas diárias</TableHeadCell>
               <TableHeadCell>Carboidratos diários</TableHeadCell>
               <TableHeadCell>Objetivo</TableHeadCell>
-              <TableHeadCell className="rounded-r-xl"></TableHeadCell>
+              <TableHeadCell></TableHeadCell>
             </tr>
           </thead>
           <tbody>
             {dietData.map((diet) => 
-              <tr key={diet.id} className="text-xs [&>*]:min-w-32 [&>*]: border-b-[1px] [&>*]:w-44 [&>*]:text-center [&>*]:p-4 [&>*]:font-primary [&>*]:textPurple w-full flex justify-between items-center">
+              <tr key={diet.id} className="text-md min-w-max [&>*]:min-w-32 [&>*]: border-b-[1px] [&>*]:w-44 [&>*]:text-center [&>*]:p-4 [&>*]:font-primary [&>*]:textPurple w-full flex justify-between items-center">
                 <td>{diet.name}</td>
                 <td>{diet.dailyKcal}</td>
                 <td>{diet.dailyProtein}</td>
                 <td>{diet.dailyCarb}</td>
                 <td>{diet.objective}</td>
-                <td><Button variant={"default"}>Abrir dieta</Button></td>
+                <td><Button variant={"default"}>Ver dieta</Button></td>
               </tr>
             )}
           </tbody>
