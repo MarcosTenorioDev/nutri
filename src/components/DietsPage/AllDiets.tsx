@@ -1,3 +1,4 @@
+import FormGenerateDiet from "../FormGenerateDiet";
 import { TableHeadCell } from "../dietsTable/TableCells";
 import { Button } from "../ui/button";
 import { PlusIcon } from "@heroicons/react/24/solid";
@@ -50,9 +51,7 @@ const AllDiets = () => {
     <div className="w-full border-[1px] max-w-6xl mx-auto bg-white p-4 sm:p-6 flex flex-col gap-4 rounded-xl shadow-2xl lg:p-10">
       <div className="flex justify-between items-center">
         <h2 className="text-base font-primary font-semibold textPurple sm:text-xl lg:text-2xl ">Minhas dietas</h2>
-        <Button variant={"default"} className="flex items-center gap-2 text-sm">
-          Criar dieta <PlusIcon className="w-5" />
-        </Button>
+        <FormGenerateDiet>Criar dieta <PlusIcon className="w-5" /></FormGenerateDiet>
       </div>
       <div className="overflow-scroll w-full bg-[]">
         <table className=" w-full flex flex-col gap-4">
