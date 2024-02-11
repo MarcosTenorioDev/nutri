@@ -20,6 +20,10 @@ export const userContext = createContext<userContext>({
 
         const token = getCookie('__session');
 
+        if(!token){
+            return false
+        }
+
         try {
             const response : AxiosResponse = await axios.get(`${environment.api}/users/userStatus`, {
                 headers: {
