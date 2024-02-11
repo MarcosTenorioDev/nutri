@@ -3,11 +3,20 @@ import { Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import Home from "./components/HomePage/Home";
 import DietsPage from "./components/DietsPage/DietsPage";
+import { useGlobalContext } from "./context/userContext";
+import { useEffect, useState } from "react";
 
-function App() {
+ function App () {
 
+  const { userIsPaid } = useGlobalContext();
+  const [userPaymentStatus, setUserPaymentStatus] = useState(false)
 
-
+  useEffect(() => {
+    userIsPaid().then((isPaid : any) => {
+      setUserPaymentStatus(isPaid)
+      console.log(userPaymentStatus)
+    });
+  }, [userIsPaid]);
 
   return (
     <div className="bg-nutriBlue min-h-screen">
