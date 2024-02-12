@@ -1,52 +1,31 @@
+import { useEffect, useState } from "react";
 import FormGenerateDiet from "../FormGenerateDiet";
 import { TableHeadCell } from "../dietsTable/TableCells";
 import { Button } from "../ui/button";
 import { PlusIcon } from "@heroicons/react/24/solid";
+import { getAllDiets } from "@/services/diet.services";
 
-interface tableAllDiets {
-  id: string;
-  name: string;
-  dailyKcal: number;
-  dailyProtein: number;
-  dailyCarb: number;
-  objective: string;
-}
 
 const AllDiets = () => {
-  const dietData : tableAllDiets[] = [
-    {
-      id: "11232384234",
-      name: "Marcos hipertrofia",
-      dailyKcal: 3000,
-      dailyProtein: 180,
-      dailyCarb: 300,
-      objective: "ganho de massa",
-    },
-    {
-      id: "1121231234453234234",
-      name: "Marcos corrida",
-      dailyKcal: 3300,
-      dailyProtein: 200,
-      dailyCarb: 300,
-      objective: "ganho de massa",
-    },
-    {
-      id: "1112323212334234",
-      name: "Marcos rawMeat",
-      dailyKcal: 2900,
-      dailyProtein: 200,
-      dailyCarb: 250,
-      objective: "ganho de massa",
-    },
-    {
-      id: "11652323234234",
-      name: "Marcos emagrecimento",
-      dailyKcal: 2200,
-      dailyProtein: 140,
-      dailyCarb: 230,
-      objective: "ganho de massa",
-    },
-  ];
+  const [dietData, setDietData] : any = useState([]);
+
+  useEffect(()=> {
+    getAllDiets().then((diets: any) => {
+      const parsedDiets: any = [];
+      diets.map((diet: any) => {
+        try{
+          const parsedDietData = JSON.parse(diet.dietData);
+          diet.dietData = parsedDietData;
+          parsedDiets.push(diet);
+        }catch(err){
+          console.log('dieta deu erro');
+        }
+      })
+      setDietData(parsedDiets);
+    })
+
+  }, [AllDiets])
+  
   return (
     <div className="w-full border-[1px] max-w-6xl mx-auto bg-white p-4 sm:p-6 flex flex-col gap-4 rounded-xl shadow-2xl lg:p-10">
       <div className="flex justify-between items-center">
@@ -66,13 +45,13 @@ const AllDiets = () => {
             </tr>
           </thead>
           <tbody>
-            {dietData.map((diet) => 
+            {dietData.map((diet : any) =>   
               <tr key={diet.id} className="text-md min-w-max [&>*]:min-w-32 [&>*]: border-b-[1px] [&>*]:w-44 [&>*]:text-center [&>*]:p-4 [&>*]:font-primary [&>*]:textPurple w-full flex justify-between items-center">
                 <td>{diet.name}</td>
-                <td>{diet.dailyKcal}</td>
-                <td>{diet.dailyProtein}</td>
-                <td>{diet.dailyCarb}</td>
-                <td>{diet.objective}</td>
+                <td>{diet.dietData?.IngestaoDiaria.Calorias}</td>
+                <td>{diet.dietData?.IngestaoDiaria.Proteina}</td>
+                <td>{diet.dietData?.IngestaoDiaria.Carboidratos}</td>
+                <td>{diet.dietData?.Objetivo}</td>
                 <td><Button variant={"default"}>Ver dieta</Button></td>
               </tr>
             )}

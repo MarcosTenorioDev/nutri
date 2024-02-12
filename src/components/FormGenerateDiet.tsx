@@ -39,6 +39,7 @@ const FormGenerateDiet = (props: any) => {
   });
 
   //modificar a regra de criar dieta no backend e criar o prompt lá e apenas enviar o formulário
+  //modificar prompt e chaves do json no componente de AllDiets
   const onSubmit = (values: any) => {
     console.log("Formulário submetido:", values);
     const {userTerms, dietName, ...payload} = values;

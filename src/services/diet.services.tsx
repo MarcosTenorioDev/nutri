@@ -29,3 +29,35 @@ export async function postDiet(payload: any) {
   }
   
 }
+
+export async function getAllDiets(){
+
+  const cookies = document.cookie;
+
+  const getCookie = (name: string) => {
+    const value = `; ${cookies}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop()?.split(";").shift();
+  };
+
+  const token = getCookie("__session");
+
+  if (!token) {
+    return false;
+  }
+
+
+  try{
+    const result = await axios.get(`${environment.api}/diet/allDiets`,{
+        headers: {
+          Authorization: `${token}`,
+        }
+      }); 
+      const diets = result.data
+      return diets
+  }catch(err: any){
+    throw new Error(err)
+  }
+
+
+}
