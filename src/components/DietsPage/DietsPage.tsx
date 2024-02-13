@@ -10,9 +10,7 @@ const DietsPage = () => {
             Vejas e edite suas dietas
           </h1>
           <h2 className="font-primary textPurple opacity-70">
-            Whether your time-saving automation needs are large or small, were
-            here to help you scale.
-          </h2>
+          Aqui você pode criar, visualizar e editar suas dietas personalizadas. Mantenha-se saudável e em forma com nossas opções nutritivas!          </h2>
           </div>
           
 

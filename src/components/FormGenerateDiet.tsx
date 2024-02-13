@@ -4,6 +4,7 @@ import { Dialog, DialogTrigger, DialogContent } from "./ui/dialog";
 import { Button } from "./ui/button";
 import { Input, CheckboxUserTerms }from "./Input";
 import { postDiet } from "@/services/diet.services";
+import { useRef } from "react";
 
 const FormGenerateDiet = (props: any) => {
   const initialValues = {
@@ -38,10 +39,18 @@ const FormGenerateDiet = (props: any) => {
     userTerms: Yup.boolean().isTrue("Termos de uso é obrigatório"),
   });
 
+
+  const modalRef = useRef<HTMLButtonElement | null>(null);
+  function closeModal(){
+    if(modalRef.current){
+      modalRef.current.click();
+    }
+
+  }
+
   //modificar a regra de criar dieta no backend e criar o prompt lá e apenas enviar o formulário
   //modificar prompt e chaves do json no componente de AllDiets
   const onSubmit = (values: any) => {
-    console.log("Formulário submetido:", values);
     const {userTerms, dietName, ...payload} = values;
     const prompt = `Faça uma dieta para uma pessoa chamada ${payload.username}, 
     altura:${payload.height}, 
@@ -83,12 +92,13 @@ const FormGenerateDiet = (props: any) => {
     `;
     const dietPayload = {dietName,prompt};
     postDiet(dietPayload);
+    closeModal();
 
   };
 
   return (
     <Dialog>
-      <DialogTrigger>
+      <DialogTrigger ref={modalRef}>
         <div className="flex items-center gap-2 text-sm bg-primary text-primary-foreground shadow hover:bg-primary/90 justify-center whitespace-nowrap rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 h-9 px-4">
           {props.children}
         </div>
@@ -104,7 +114,8 @@ const FormGenerateDiet = (props: any) => {
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={onSubmit}           
+            onSubmit={onSubmit}  
+
           >
             <Form className="flex flex-col w-full p-2">
               <div className="w-full flex flex-col xl:flex-row xl:gap-6">
