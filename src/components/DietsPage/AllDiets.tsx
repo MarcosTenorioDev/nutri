@@ -3,34 +3,64 @@ import FormGenerateDiet from "../FormGenerateDiet";
 import { TableHeadCell } from "../dietsTable/TableCells";
 import { Button } from "../ui/button";
 import { PlusIcon } from "@heroicons/react/24/solid";
-import { getAllDiets } from "@/services/diet.services";
-
+import { deleteDietById, getAllDiets } from "@/services/diet.services";
+import { TrashIcon } from "@heroicons/react/24/solid";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 const AllDiets = () => {
-  const [dietData, setDietData] : any = useState([]);
+  const [dietData, setDietData]: any = useState([]);
 
-  useEffect(()=> {
+  useEffect(() => {
     getAllDiets().then((diets: any) => {
       const parsedDiets: any = [];
       diets.map((diet: any) => {
-        try{
+        try {
           const parsedDietData = JSON.parse(diet.dietData);
           diet.dietData = parsedDietData;
           parsedDiets.push(diet);
-        }catch(err){
-          console.log('dieta deu erro');
+        } catch (err) {
+          console.log("dieta deu erro");
         }
-      })
+      });
       setDietData(parsedDiets);
-    })
+    });
+  }, [AllDiets]);
 
-  }, [AllDiets])
-  
+  const deleteDiet = (id: any) => {
+    deleteDietById(id).then(() => getAllDiets().then((diets: any) => {
+      const parsedDiets: any = [];
+      diets.map((diet: any) => {
+        try {
+          const parsedDietData = JSON.parse(diet.dietData);
+          diet.dietData = parsedDietData;
+          parsedDiets.push(diet);
+        } catch (err) {
+          console.log("dieta deu erro");
+        }
+        setDietData(parsedDiets);
+      });
+    }))
+  }
+
   return (
     <div className="w-full border-[1px] max-w-6xl mx-auto bg-white p-4 sm:p-6 flex flex-col gap-4 rounded-xl shadow-2xl lg:p-10">
       <div className="flex justify-between items-center">
-        <h2 className="text-base font-primary font-semibold textPurple sm:text-xl lg:text-2xl ">Minhas dietas</h2>
-        <FormGenerateDiet>Criar dieta <PlusIcon className="w-5" /></FormGenerateDiet>
+        <h2 className="text-base font-primary font-semibold textPurple sm:text-xl lg:text-2xl ">
+          Minhas dietas
+        </h2>
+        <FormGenerateDiet>
+          Criar dieta <PlusIcon className="w-5" />
+        </FormGenerateDiet>
       </div>
       <div className="overflow-scroll w-full bg-[]">
         <table className=" w-full flex flex-col gap-4">
@@ -45,16 +75,42 @@ const AllDiets = () => {
             </tr>
           </thead>
           <tbody>
-            {dietData.map((diet : any) =>   
-              <tr key={diet.id} className="text-md min-w-max [&>*]:min-w-32 [&>*]: border-b-[1px] [&>*]:w-44 [&>*]:text-center [&>*]:p-4 [&>*]:font-primary [&>*]:textPurple w-full flex justify-between items-center">
+            {dietData.map((diet: any) => (
+              <tr
+                key={diet.id}
+                className="text-md min-w-max [&>*]:min-w-32 [&>*]: border-b-[1px] [&>*]:w-44 [&>*]:text-center [&>*]:p-4 [&>*]:font-primary [&>*]:textPurple w-full flex justify-between items-center"
+              >
                 <td>{diet.name}</td>
                 <td>{diet.dietData?.IngestaoDiaria.Calorias}</td>
                 <td>{diet.dietData?.IngestaoDiaria.Proteina}</td>
                 <td>{diet.dietData?.IngestaoDiaria.Carboidratos}</td>
                 <td>{diet.dietData?.Objetivo}</td>
-                <td><Button variant={"default"}>Ver dieta</Button></td>
+                <td className="flex items-center justify-center gap-3">
+                  <Button variant={"default"}>Ver dieta</Button>
+                  <AlertDialog>
+                    <AlertDialogTrigger>
+                      <TrashIcon className="text-destructive w-9 pb-1 hover:text-destructive/90" />
+                    </AlertDialogTrigger>
+                    <AlertDialogContent className="bg-white border-red-600 border-2">
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>
+                          Você tem certeza que deseja excluir sua dieta?
+                        </AlertDialogTitle>
+                        <AlertDialogDescription>
+                        Essa ação não pode ser desfeita. Isso vai excluir sua dieta permanentemente.
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter>
+                        <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                        <AlertDialogAction className="bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90" onClick={() => deleteDiet(diet.id)}>
+                          Excluir dieta
+                        </AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
+                </td>
               </tr>
-            )}
+            ))}
           </tbody>
         </table>
       </div>

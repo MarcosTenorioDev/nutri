@@ -61,3 +61,31 @@ export async function getAllDiets(){
 
 
 }
+
+export async function deleteDietById(id: string){
+  const cookies = document.cookie;
+
+  const getCookie = (name: string) => {
+    const value = `; ${cookies}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop()?.split(";").shift();
+  };
+
+  const token = getCookie("__session");
+
+  if (!token) {
+    return false;
+  }
+
+  try{
+    const result = await axios.delete(`${environment.api}/diet/${id}`,{
+        headers: {
+          Authorization: `${token}`,
+        }
+      }); 
+      return result
+  }catch(err: any){
+    throw new Error(err)
+  }
+
+}
