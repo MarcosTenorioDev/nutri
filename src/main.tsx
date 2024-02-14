@@ -18,6 +18,9 @@ const ClerkWithRoutes = () => {
     <ClerkProvider
       publishableKey={clerkPubKey}
       navigate={(to: any) => navigate(to)}
+      appearance={{
+        variables: { colorPrimary: 'green' },
+      }}
     >
       <userContext.Provider value={{ userIsPaid }}>
         <App />
