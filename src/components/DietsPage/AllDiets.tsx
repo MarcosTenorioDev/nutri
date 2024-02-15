@@ -35,6 +35,9 @@ const AllDiets = () => {
         }
       });
       setDietData(parsedDiets);
+    }).catch((error) => {
+      console.error(error)
+      errorToastGetAllDiets();
     });
   }, [AllDiets]);
 
@@ -88,6 +91,15 @@ const AllDiets = () => {
           Tente novamente
         </ToastAction>
       ),
+    });
+  };
+
+  const errorToastGetAllDiets = () => {
+    toast({
+      variant: "destructive",
+      title: "Sinto muito! parece que temos um problema...",
+      description:
+        "Houve um erro ao recuperar suas dietas, aguarde um minuto, já estamos resolvendo.",
     });
   };
 
