@@ -16,6 +16,8 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { ToastAction } from "../ui/toast";
+import { toast } from "../ui/use-toast";
 
 const AllDiets = () => {
   const [dietData, setDietData]: any = useState([]);
@@ -36,21 +38,58 @@ const AllDiets = () => {
     });
   }, [AllDiets]);
 
-  const deleteDiet = (id: any) => {
-    deleteDietById(id).then(() => getAllDiets().then((diets: any) => {
-      const parsedDiets: any = [];
-      diets.map((diet: any) => {
-        try {
-          const parsedDietData = JSON.parse(diet.dietData);
-          diet.dietData = parsedDietData;
-          parsedDiets.push(diet);
-        } catch (err) {
-          console.log("dieta deu erro");
+  const deleteDiet = (id: any, showErrorToast: boolean = true) => {
+
+      deleteDietById(id).then(() => getAllDiets().then((diets: any) => {
+        const parsedDiets: any = [];
+        diets.map((diet: any) => {
+          try {
+            const parsedDietData = JSON.parse(diet.dietData);
+            diet.dietData = parsedDietData;
+            parsedDiets.push(diet);
+            sucessToast()
+          } catch (err) {
+            errorToast(diet)
+            console.log("Erro ao renderizar dieta ");
+          }
+          setDietData(parsedDiets);
+        });
+      })).catch((error) => {
+        if(showErrorToast){
+          errorToast(id)
         }
-        setDietData(parsedDiets);
-      });
-    }))
+        console.error(error)
+      })
+    
+  
   }
+
+  const sucessToast = () => {
+    toast({
+      title: "Nutri.io",
+      description: "Sua dieta foi excluida com sucesso!",
+    });
+  };
+
+  const errorToast = (id: string) => {
+    toast({
+      variant: "destructive",
+      title: "Oops... parece que temos um problema.",
+      description:
+        "Houve um erro ao excluir sua dieta, por favor, tente novamente.",
+      
+      action: (
+        <ToastAction
+          altText="Tente novamente"
+          onClick={() => {
+            deleteDiet(id, false)
+          }}
+        >
+          Tente novamente
+        </ToastAction>
+      ),
+    });
+  };
 
   return (
     <div className="w-full border-[1px] max-w-6xl mx-auto bg-white p-4 sm:p-6 flex flex-col gap-4 rounded-xl shadow-2xl lg:p-10">
