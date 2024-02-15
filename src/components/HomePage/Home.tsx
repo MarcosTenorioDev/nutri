@@ -5,6 +5,7 @@ import { ArrowLeftIcon, CameraIcon } from "@heroicons/react/24/outline";
 import foodFreezer from "../../assets/images/foodInFreezer.png";
 import foodResult from "../../assets/images/foodResult.png";
 import DietTable from "../dietsTable/dietsTable";
+import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/24/solid";
 
 const Home = () => {
   const jsonExample = {
@@ -107,7 +108,7 @@ const Home = () => {
     InformacoesAdicionais:
       "Certifique-se de beber bastante água ao longo do dia e ajuste as porções conforme a resposta do seu corpo ao longo do tempo. Consulte um nutricionista regularmente para otimizar a dieta.",
   };
-  
+
   return (
     <>
       <div className="flex flex-col items-center px-4 py-8 gap-4 max-w-7xl mx-auto sm:items-start sm:justify-start sm:py-24 mb-11 md:px-8 md:py-44">
@@ -126,16 +127,13 @@ const Home = () => {
             </h2>
           </div>
         </div>
-        <Button variant={"default"} className="w-40 p-5 text-md rounded-lg lg:p-7 lg:text-xl">
+        <Button
+          variant={"default"}
+          className="w-40 p-5 text-md rounded-lg lg:p-7 lg:text-xl"
+        >
           Gerar dieta
         </Button>
       </div>
-
-
-
-
-
-
 
       <div className="px-4 mb-10">
         <h2 className="text-[#525252] font-bold text-base text-center md:text-2xl mb-6 max-w-7xl mx-auto lg:mb-16">
@@ -144,17 +142,10 @@ const Home = () => {
           nutri.io !
         </h2>
 
-        <DietTable jsonExample={jsonExample}/>
+        <DietTable jsonExample={jsonExample} />
       </div>
 
-
-
-
-
-
-
-{/* Faltar adicionar sombra nos componentes de chat e dietTable */}
-
+      {/* Faltar adicionar sombra nos componentes de chat e dietTable */}
 
       <div className="bg-opacity-20 min-h-screen w-screen bg bg-custom-green-opacity py-12 px-4">
         <div className="max-w-7xl mx-auto flex items-center md:justify-center md:items-center flex-col">
@@ -238,11 +229,107 @@ const Home = () => {
         </div>
       </div>
 
+      <div className="py-10 max-w-7xl mx-auto text-center sm:text-start px-4 sm:px-12">
+        <h2 className="font-primary text-3xl textPurple font-bold">
+          Planos e Preços
+        </h2>
+        <p className="font-primary textPurple opacity-70">
+          Veja agora os melhores planos para o seu objetivo !
+        </p>
 
+        <section className="h-full w-full bg-gray-500 rounded-3xl bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-10 shadow-lg mt-8">
+          <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+            <div className="space-y-8 lg:grid lg:grid-cols-2 sm:gap-6 xl:gap-10 lg:space-y-0">
+              <div className="flex flex-col p-6 mx-auto max-w-sm text-center textPurple bg-white rounded-2xl border-primary border shadow-lg dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
+                <h3 className="mb-4 text-xl sm:text-2xl md:text-2xl lg:text-2xl xl:text-2xl font-semibold">
+                  Plano básico
+                </h3>
+                <p className="font-light text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg textPurple opacity-50 dark:text-gray-400">
+                  Para você que apenas quer fazer dietas personalizadas.
+                </p>
+                <div className="flex justify-center items-baseline my-8">
+                  <span className="mr-2 text-4xl sm:text-5xl font-extrabold">
+                    R$15
+                  </span>
+                  <span className="text-sm sm:text-base textPurple opacity-50">
+                    Pagamento único
+                  </span>
+                </div>
+                <ul role="list" className="mb-8 space-y-4 text-left">
+                  <li className="flex items-center space-x-3">
+                    <CheckCircleIcon className="min-w-6 max-w-6 text-primary" />
+                    <span className="text-sm sm:text-base">
+                      Crie até 10 dietas
+                    </span>
+                  </li>
+                  <li className="flex items-center space-x-3">
+                    <CheckCircleIcon className="min-w-6 max-w-6 text-primary" />
+                    <span className="text-sm sm:text-base">
+                      Dietas baseadas em paramêtros complexos e individuais
+                    </span>
+                  </li>
+                  <li className="flex items-center space-x-3">
+                    <XCircleIcon className="min-w-6 max-w-6 text-red-500" />
+                    <span className="text-sm sm:text-base">
+                      Chatbot especializado 24hrs para tirar todas as suas
+                      dúvidas
+                    </span>
+                  </li>
+                  <li className="flex items-center space-x-3">
+                    <XCircleIcon className="min-w-6 max-w-6 text-red-500" />
+                    <span className="text-sm sm:text-base">
+                      Recomendações de receitas diversas para suas dietas sem
+                      afetar o ganho calórico.
+                    </span>
+                  </li>
+                </ul>
+                <div className="w-full">
+                  <Button
+                    variant={"default"}
+                    className="w-44 shadow-lg text-sm sm:text-md"
+                  >
+                    Vamos lá!
+                  </Button>
+                </div>
+              </div>
 
-      <div className="py-10 max-w-7xl mx-auto">
-        <h2 className="font-primary text-3xl textPurple font-bold">Planos e Preços</h2>
-        <p className="font-primary textPurple opacity-70">Veja agora os melhores planos para o seu objetivo !</p>
+              <div className="flex flex-col p-6 mx-auto max-w-sm text-center textPurple bg-white rounded-2xl border-primary border shadow-lg dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
+    <div className="w-full text-center mb-4">
+        <h3 className="text-xl sm:text-2xl md:text-2xl lg:text-2xl xl:text-2xl font-semibold">Plano avançado</h3>
+    </div>
+    <p className="font-light text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg textPurple opacity-50 dark:text-gray-400">
+        A melhor opção para você que quer um serviço completo.
+    </p>
+    <div className="flex justify-center items-baseline my-8">
+        <span className="mr-2 text-4xl sm:text-5xl font-extrabold">R$35</span>
+        <span className="text-sm sm:text-base textPurple opacity-50">Pagamento único</span>
+    </div>
+    <ul role="list" className="mb-8 space-y-4 text-left">
+        <li className="flex items-center space-x-3">
+            <CheckCircleIcon className="min-w-6 max-w-6 text-primary" />
+            <span className="text-sm sm:text-base">Crie até 10 dietas</span>
+        </li>
+        <li className="flex items-center space-x-3">
+            <CheckCircleIcon className="min-w-6 max-w-6 text-primary" />
+            <span className="text-sm sm:text-base">Dietas baseadas em paramêtros complexos e individuais</span>
+        </li>
+        <li className="flex items-center space-x-3">
+            <CheckCircleIcon className="min-w-6 max-w-6 text-primary" />
+            <span className="text-sm sm:text-base">Chatbot especializado 24hrs para tirar todas as suas dúvidas</span>
+        </li>
+        <li className="flex items-center space-x-3">
+            <CheckCircleIcon className="min-w-6 max-w-6 text-primary" />
+            <span className="text-sm sm:text-base">Recomendações de receitas diversas para suas dietas sem afetar o ganho calórico.</span>
+        </li>
+    </ul>
+    <div className="w-full">
+        <Button variant={"default"} disabled={true} className="w-44 shadow-lg text-sm sm:text-md">Em breve...</Button>
+    </div>
+</div>
+
+            </div>
+          </div>
+        </section>
       </div>
     </>
   );
