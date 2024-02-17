@@ -4,13 +4,16 @@ import { Dialog, DialogTrigger, DialogContent } from "./ui/dialog";
 import { Button } from "./ui/button";
 import { Input, CheckboxUserTerms } from "./Input";
 import { postDiet } from "@/services/diet.services";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { useToast } from "./ui/use-toast";
 import { ToastAction } from "./ui/toast";
+import LoadingDiet from "./LoadingDiet";
+
 
 const FormGenerateDiet = (props: any) => {
   const { toast } = useToast();
+  const [loading, setLoading] = useState(false);
   const initialValues = {
     dietName: "",
     username: "",
@@ -45,6 +48,7 @@ const FormGenerateDiet = (props: any) => {
 
   const modalRef = useRef<HTMLButtonElement | null>(null);
   function closeModal() {
+    console.log(modalRef.current)
     if (modalRef.current) {
       modalRef.current.click();
     }
@@ -80,6 +84,8 @@ const FormGenerateDiet = (props: any) => {
   //modificar a regra de criar dieta no backend e criar o prompt lá e apenas enviar o formulário
   //modificar prompt e chaves do json no componente de AllDiets
   const onSubmit = async (values: any, showErrorToast? : any) => {
+    setLoading(true)
+    closeModal();
     const { userTerms, dietName, ...payload } = values;
     const prompt = `Faça uma dieta para uma pessoa chamada ${payload.username}, 
     altura:${payload.height}, 
@@ -131,13 +137,13 @@ const FormGenerateDiet = (props: any) => {
       }
       console.log(error);
     }
-    closeModal();
+    setLoading(false)
   };
 
   return (
     <>
       <Toaster />
-      <Dialog>
+      {loading ? <LoadingDiet/> : <Dialog>
         <DialogTrigger ref={modalRef}>
           <div className="flex items-center gap-2 text-sm bg-primary text-primary-foreground shadow hover:bg-primary/90 justify-center whitespace-nowrap rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 h-9 px-4">
             {props.children}
@@ -204,7 +210,7 @@ const FormGenerateDiet = (props: any) => {
             </Formik>
           </div>
         </DialogContent>
-      </Dialog>
+      </Dialog>}
     </>
   );
 };
