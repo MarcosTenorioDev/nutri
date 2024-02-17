@@ -30,11 +30,10 @@ export const userContext = createContext<userContext>({
                     Authorization: `${token}`
                 }
             });
-            console.log(response.data)
             return response.data.isPaid
 
         } catch (error : any) {
-            console.error("Error verifying user payment status:", error.response.data.message);
+            console.error("Error verifying user payment status:", error?.response?.data?.message);
             return false
         }
     },
