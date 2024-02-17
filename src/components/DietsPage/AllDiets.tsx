@@ -21,6 +21,7 @@ import { toast } from "../ui/use-toast";
 
 const AllDiets = () => {
   const [dietData, setDietData]: any = useState([]);
+  const [disableDeleteButton, setDisableDeleteButton] = useState(false)
 
   useEffect(() => {
     getAllDiets().then((diets: any) => {
@@ -32,6 +33,7 @@ const AllDiets = () => {
           parsedDiets.push(diet);
         } catch (err) {
           console.log("dieta deu erro");
+          deleteDiet(diet.id)
         }
       });
       setDietData(parsedDiets);
@@ -42,7 +44,7 @@ const AllDiets = () => {
   }, [AllDiets]);
 
   const deleteDiet = (id: any, showErrorToast: boolean = true) => {
-
+    setDisableDeleteButton(true)
       deleteDietById(id).then(() => getAllDiets().then((diets: any) => {
         const parsedDiets: any = [];
         diets.map((diet: any) => {
@@ -56,14 +58,17 @@ const AllDiets = () => {
             console.log("Erro ao renderizar dieta ");
           }
           setDietData(parsedDiets);
+          setDisableDeleteButton(false)
         });
       })).catch((error) => {
         if(showErrorToast){
           errorToast(id)
         }
         console.error(error)
+        setDisableDeleteButton(false)
       })
-    
+
+
   
   }
 
@@ -139,8 +144,8 @@ const AllDiets = () => {
                 <td className="flex items-center justify-center gap-3">
                   <Button variant={"default"}>Ver dieta</Button>
                   <AlertDialog>
-                    <AlertDialogTrigger>
-                      <TrashIcon className="text-destructive w-9 pb-1 hover:text-destructive/90" />
+                    <AlertDialogTrigger disabled={disableDeleteButton}>
+                      <TrashIcon className={`${disableDeleteButton ? 'text-muted w-9 pb-1' : '  text-destructive w-9 pb-1 hover:text-destructive/90'}`} />
                     </AlertDialogTrigger>
                     <AlertDialogContent className="bg-white border-red-600 border-2">
                       <AlertDialogHeader>
