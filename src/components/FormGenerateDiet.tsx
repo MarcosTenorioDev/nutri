@@ -48,7 +48,6 @@ const FormGenerateDiet = (props: any) => {
 
   const modalRef = useRef<HTMLButtonElement | null>(null);
   function closeModal() {
-    console.log(modalRef.current)
     if (modalRef.current) {
       modalRef.current.click();
     }
