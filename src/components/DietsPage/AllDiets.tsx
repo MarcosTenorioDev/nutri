@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import FormGenerateDiet from "../FormGenerateDiet";
 import { TableHeadCell } from "../dietsTable/TableCells";
-import { Button } from "../ui/button";
 import { PlusIcon } from "@heroicons/react/24/solid";
 import { deleteDietById, getAllDiets } from "@/services/diet.services";
 import { TrashIcon } from "@heroicons/react/24/solid";
@@ -18,6 +17,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { ToastAction } from "../ui/toast";
 import { toast } from "../ui/use-toast";
+import ModalTable from "../dietsTable/modalDiet";
 
 const AllDiets = () => {
   const [dietData, setDietData]: any = useState([]);
@@ -29,6 +29,7 @@ const AllDiets = () => {
       diets.map((diet: any) => {
         try {
           const parsedDietData = JSON.parse(diet.dietData);
+          console.log(parsedDietData)
           diet.dietData = parsedDietData;
           parsedDiets.push(diet);
         } catch (err) {
@@ -114,6 +115,7 @@ const AllDiets = () => {
         <h2 className="text-base font-primary font-semibold textPurple sm:text-xl lg:text-2xl ">
           Minhas dietas
         </h2>
+        
         <FormGenerateDiet>
           Criar dieta <PlusIcon className="w-5" />
         </FormGenerateDiet>
@@ -142,7 +144,7 @@ const AllDiets = () => {
                 <td>{diet.dietData?.IngestaoDiaria.Carboidratos}</td>
                 <td>{diet.dietData?.Objetivo}</td>
                 <td className="flex items-center justify-center gap-3">
-                  <Button variant={"default"}>Ver dieta</Button>
+                  <ModalTable diet={diet}/>
                   <AlertDialog>
                     <AlertDialogTrigger disabled={disableDeleteButton}>
                       <TrashIcon className={`${disableDeleteButton ? 'text-muted w-9 pb-1' : '  text-destructive w-9 pb-1 hover:text-destructive/90'}`} />
