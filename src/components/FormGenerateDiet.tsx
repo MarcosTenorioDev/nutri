@@ -2,14 +2,13 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { Dialog, DialogTrigger, DialogContent } from "./ui/dialog";
 import { Button } from "./ui/button";
-import { Input, CheckboxUserTerms } from "./Input";
+import { Input, CheckboxUserTerms, Select } from "./Input";
 import { postDiet } from "@/services/diet.services";
 import { useRef, useState } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { useToast } from "./ui/use-toast";
 import { ToastAction } from "./ui/toast";
 import LoadingDiet from "./LoadingDiet";
-
 
 const FormGenerateDiet = (props: any) => {
   const { toast } = useToast();
@@ -66,7 +65,7 @@ const FormGenerateDiet = (props: any) => {
       title: "Oops... parece que temos um problema.",
       description:
         "Houve um erro ao criar sua dieta, por favor, tente novamente.",
-      
+
       action: (
         <ToastAction
           altText="Tente novamente"
@@ -82,8 +81,8 @@ const FormGenerateDiet = (props: any) => {
 
   //modificar a regra de criar dieta no backend e criar o prompt lá e apenas enviar o formulário
   //modificar prompt e chaves do json no componente de AllDiets
-  const onSubmit = async (values: any, showErrorToast? : any) => {
-    setLoading(true)
+  const onSubmit = async (values: any, showErrorToast?: any) => {
+    setLoading(true);
     closeModal();
     const { userTerms, dietName, ...payload } = values;
     const prompt = `Faça uma dieta para uma pessoa chamada ${payload.username}, 
@@ -130,86 +129,178 @@ const FormGenerateDiet = (props: any) => {
         sucessToast();
       });
     } catch (error) {
-      if(showErrorToast){
+      if (showErrorToast) {
         console.log(error);
         errorToast(values);
       }
       console.log(error);
     }
-    setLoading(false)
+    setLoading(false);
   };
 
   return (
     <>
       <Toaster />
-      {loading ? <LoadingDiet/> : <Dialog>
-        <DialogTrigger ref={modalRef}>
-          <div className="flex items-center gap-2 text-sm bg-primary text-primary-foreground shadow hover:bg-primary/90 justify-center whitespace-nowrap rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 h-9 px-4">
-            {props.children}
-          </div>
-        </DialogTrigger>
-        <DialogContent className="bg-nutriBlue w-11/12 sm:w-10/12 h-5/6 lg:w-full rounded-xl border-2 border-primary xl:min-w-max xl:h-auto">
-          <h2 className="font-primary text-2xl textPurple font-bold">
-            Vamos lá !
-          </h2>
-          <h3 className="font-primary textPurple opacity-70 text-md">
-            Mas antes, precisamos de algumas informações suas.
-          </h3>
-          <div className="overflow-auto flex justify-center">
-            <Formik
-              initialValues={initialValues}
-              validationSchema={validationSchema}
-              onSubmit={onSubmit}
-            >
-              <Form className="flex flex-col w-full p-2">
-                <div className="w-full flex flex-col xl:flex-row xl:gap-6">
-                  <div className="w-full xl:w-6/12 flex flex-col justify-between">
-                    <Input control="dietName">Diet Name</Input>
-                    <Input control="username">Username</Input>
-                    <div className="flex gap-4 justify-between">
-                      <div className="w-5/12 flex flex-col gap-0">
-                        <Input control="height">height</Input>
-                        <Input control="weight">weight</Input>
+      {loading ? (
+        <LoadingDiet />
+      ) : (
+        <Dialog>
+          <DialogTrigger ref={modalRef}>
+            <div className="flex items-center gap-2 text-sm bg-primary text-primary-foreground shadow hover:bg-primary/90 justify-center whitespace-nowrap rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 h-9 px-4">
+              {props.children}
+            </div>
+          </DialogTrigger>
+          <DialogContent className="bg-nutriBlue w-11/12 sm:w-10/12 h-5/6 lg:w-full rounded-xl border-2 border-primary xl:min-w-max xl:h-auto">
+            <h2 className="font-primary text-2xl textPurple font-bold">
+              Vamos lá !
+            </h2>
+            <h3 className="font-primary textPurple opacity-70 text-md">
+              Mas antes, precisamos de algumas informações suas.
+            </h3>
+            <div className="overflow-auto flex justify-center">
+              <Formik
+                initialValues={initialValues}
+                validationSchema={validationSchema}
+                onSubmit={onSubmit}
+              >
+                <Form className="flex flex-col w-full p-2">
+                  <div className="w-full flex flex-col xl:flex-row xl:gap-6">
+                    <div className="w-full xl:w-6/12 flex flex-col justify-between">
+                      <Input control="dietName" componentClassName='mb-4'>Nome da dieta</Input>
+                      <Input control="username" componentClassName='mb-4'>Nome de usuário</Input>
+                      <div className="flex gap-0 justify-between">
+                        <div className="w-5/12 flex flex-col gap-0">
+                          <Input control="height" componentClassName='mb-4'>Altura</Input>
+                          <Input control="weight">Peso</Input>
+                        </div>
+                        <div className="w-5/12 flex flex-col gap-0">
+                          <Input control="age" componentClassName='mb-4'>Idade</Input>
+                          <Select
+                            control="gender"
+                            options={[
+                              { value: "", label: "Selecione uma opção" }, 
+                              { value: "Masculino", label: "Masculino" },
+                              { value: "Feminino", label: "Feminino" },
+                            ]}
+                            info={
+                              <a
+                                className="text-muted-foreground underline text-xs"
+                                href=""
+                              >
+                                Porquê precisamos saber?
+                              </a>
+                            }
+                          >
+                            Sexo
+                          </Select>
+                        </div>
                       </div>
-                      <div className="w-5/12 flex flex-col gap-0">
-                        <Input control="age">age</Input>
-                        <Input control="gender">gender</Input>
-                      </div>
+
+                      <Select
+                        control="objective"
+                        options={[
+                          { value: "", label: "Selecione uma opção" }, 
+                          { value: "Ectomorfo", label: "Ectomorfo" },
+                          { value: "Endomorfo", label: "Endomorfo" },
+                          { value: "Mesomorfo", label: "Mesomorfo" },
+                          { value: "Indefinido", label: "Não sei" },
+                        ]}
+                        info={
+                          <a
+                            className="text-muted-foreground underline text-xs"
+                            href=""
+                          >
+                            Qual o meu biotipo ?
+                          </a>
+                        }
+                        componentClassName='mb-4'
+                      >
+                        Biotipo
+                      </Select>
                     </div>
 
-                    <Input control="biotype">biotype</Input>
+                    <div className="w-full xl:w-6/12">
+                      {" "}
+                      <Select
+                        control="activityFrequence"
+                        options={[
+                          { value: "", label: "Selecione uma opção" }, 
+                          {
+                            value: "6-7 dias na semana",
+                            label: "Diariamente - de 6 a 7 dias na semana",
+                          },
+                          {
+                            value: "4-5 dias na semana",
+                            label: "Regularmente - de 4 a 5 dias na semana",
+                          },
+                          {
+                            value: "2-3 dias na semana",
+                            label: "Algumas vezes - de 2 a 3 dias na semana",
+                          },
+                          {
+                            value: "1 dia na semana",
+                            label: "Uma vez por semana",
+                          },
+                          {
+                            value: "menos de 1 dia na semana",
+                            label: "Menos de uma vez por semana",
+                          },
+                          {
+                            value: "nunca",
+                            label: "Não pratico atividade física",
+                          },
+                        ]}
+                        componentClassName='mb-4'
+                      >
+                        Frequência de atividade física
+                      </Select>
+                      <Input control="foodRestriction" componentClassName='mb-4'>
+                        Restrições alimentares
+                      </Input>
+                      <Input control="indispensableFoods" componentClassName='mb-4'>
+                        Comidas indispensáveis
+                      </Input>
+                      <Select
+                        control="objective"
+                        options={[
+                          { value: "", label: "Selecione uma opção" }, 
+                          { value: "Ganho de massa", label: "Ganho de massa" },
+                          { value: "Emagrecimento", label: "Emagrecimento" },
+                          { value: "Ganho de força", label: "Ganho de força" },
+                          {
+                            value: "Ganho de massa magra",
+                            label: "Ganho de massa magra",
+                          },
+                          {
+                            value: "Manutenção da saúde",
+                            label: "Manutenção da saúde",
+                          },
+                        ]}
+                        componentClassName='mb-4 xl:mb-10'
+                      >
+                        Objetivo
+                      </Select>
+                      <Input control="lives" componentClassName='mb-4'>País de moradia</Input>
+                    </div>
+                  </div>
+                  <div className="flex items-center mb-4 pt-3">
+                    <CheckboxUserTerms control="userTerms"></CheckboxUserTerms>
                   </div>
 
-                  <div className="w-full xl:w-6/12">
-                    {" "}
-                    <Input control="activityFrequence">activityFrequence</Input>
-                    <Input control="foodRestriction">foodRestriction</Input>
-                    <Input control="indispensableFoods">
-                      indispensableFoods
-                    </Input>
-                    <Input control="objective">objective</Input>
-                    <Input control="lives">lives</Input>
+                  <div className="w-full flex justify-center">
+                    <Button
+                      type="submit"
+                      className="min-w-44 md:text-base xl:text-xl xl:p-5"
+                    >
+                      Enviar
+                    </Button>
                   </div>
-                </div>
-                <div className="flex items-center mb-4 pt-3">
-                  <CheckboxUserTerms control="userTerms">
-                    asdasdasd
-                  </CheckboxUserTerms>
-                </div>
-
-                <div className="w-full flex justify-center">
-                  <Button
-                    type="submit"
-                    className="min-w-44 md:text-base xl:text-xl xl:p-5"
-                  >
-                    Enviar
-                  </Button>
-                </div>
-              </Form>
-            </Formik>
-          </div>
-        </DialogContent>
-      </Dialog>}
+                </Form>
+              </Formik>
+            </div>
+          </DialogContent>
+        </Dialog>
+      )}
     </>
   );
 };

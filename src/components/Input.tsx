@@ -2,7 +2,7 @@ import { Field, ErrorMessage } from "formik";
 
 const Input = (props: any) => {
   return (
-    <div className="flex flex-col">
+    <div className={`flex flex-col ${props.componentClassName}`}>
       <label
         htmlFor={props.control}
         className={`${props.className} font-primary font-semibold mb-1"`}
@@ -19,6 +19,7 @@ const Input = (props: any) => {
             : "border-2 border-primary h-10 rounded-lg"
         }
       />
+      {props.info ? props.info : ''}
       <ErrorMessage
         name={props.control}
         component="p"
@@ -51,4 +52,40 @@ const CheckboxUserTerms = (props: any) => {
   );
 };
 
-export { Input, CheckboxUserTerms };
+const Select = (props: any) => {
+  const { control, options, className, fieldClassName, info } = props;
+
+  return (
+    <div className={`flex flex-col ${props.componentClassName}`}>
+      <label
+        htmlFor={control}
+        className={`${className} font-primary font-semibold`}
+      >
+        {props.children}
+      </label>
+      <Field
+        as="select"
+        id={control}
+        name={control}
+        className={
+          fieldClassName ? fieldClassName : "border-2 border-primary h-10 rounded-lg bg-white"
+        }
+      >
+        {options.map((option : any) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </Field>
+      {info ? info : ''}
+      <ErrorMessage
+        name={control}
+        component="p"
+        className="text-red-500 font-medium"
+      />
+    </div>
+  );
+};
+
+
+export { Input, CheckboxUserTerms, Select };
