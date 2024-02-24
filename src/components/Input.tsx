@@ -18,6 +18,7 @@ const Input = (props: any) => {
             ? props.fieldClassName
             : "border-2 border-primary h-10 rounded-lg"
         }
+        placeholder={props.placeholder}
       />
       {props.info ? props.info : ''}
       <ErrorMessage
