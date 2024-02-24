@@ -11,7 +11,6 @@ const ModalTable = (props: any) => {
   const text = `Olá, -span-, Aqui está sua dieta com objetivo em ganho de massa muscular. espero que goste!`;
 
   const [dietData] = useState(props.diet.dietData || undefined);
-  console.log(dietData)
 
   return (
     <Dialog>
