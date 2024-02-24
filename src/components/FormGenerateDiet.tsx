@@ -31,17 +31,17 @@ const FormGenerateDiet = (props: any) => {
 
   const validationSchema = Yup.object({
     dietName: Yup.string().required("Nome da dieta é obrigatório"),
-    username: Yup.string().required("Nome é obrigatório"),
-    height: Yup.number().required("Campo obrigatório"),
-    weight: Yup.number().required("Campo obrigatório"),
-    age: Yup.number().required("Campo obrigatório"),
-    gender: Yup.string().required("Campo obrigatório"),
-    biotype: Yup.string().required("Campo obrigatório"),
-    activityFrequence: Yup.string().required("Campo obrigatório"),
-    foodRestriction: Yup.string().required("Campo obrigatório"),
-    indispensableFoods: Yup.string().required("Campo obrigatório"),
-    objective: Yup.string().required("Campo obrigatório"),
-    lives: Yup.string().required("Campo obrigatório"),
+    username: Yup.string().required("Nome de usuário é obrigatório"),
+    height: Yup.number().required("Altura é obrigatória"),
+    weight: Yup.number().required("Peso é obrigatório"),
+    age: Yup.number().required("Idade é obrigatória"),
+    gender: Yup.string().required("Sexo é obrigatório"),
+    biotype: Yup.string().required("Biotipo é obrigatório"),
+    activityFrequence: Yup.string().required("Frequência é obrigatório"),
+    foodRestriction: Yup.string(),
+    indispensableFoods: Yup.string(),
+    objective: Yup.string().required("Objetivo é obrigatório"),
+    lives: Yup.string().required("País de moradia é obrigatório"),
     userTerms: Yup.boolean().isTrue("Termos de uso é obrigatório"),
   });
 
@@ -166,15 +166,15 @@ const FormGenerateDiet = (props: any) => {
                 <Form className="flex flex-col w-full p-2">
                   <div className="w-full flex flex-col xl:flex-row xl:gap-6">
                     <div className="w-full xl:w-6/12 flex flex-col justify-between">
-                      <Input control="dietName" componentClassName='mb-4'>Nome da dieta</Input>
-                      <Input control="username" componentClassName='mb-4'>Nome de usuário</Input>
+                      <Input control="dietName" componentClassName='mb-4' placeholder='Ex: Marcos Hipertrofia' >Nome da dieta*</Input>
+                      <Input control="username" componentClassName='mb-4' placeholder='Insira seu nome'>Nome de usuário*</Input>
                       <div className="flex gap-0 justify-between">
                         <div className="w-5/12 flex flex-col gap-0">
-                          <Input control="height" componentClassName='mb-4'>Altura</Input>
-                          <Input control="weight">Peso</Input>
-                        </div>
+                          <Input control="height" componentClassName='mb-4' placeholder='Ex: 170'>Altura em CM*</Input>
+                          <Input control="weight" placeholder='Ex: 70'>Peso em KG*</Input>
+                        </div> 
                         <div className="w-5/12 flex flex-col gap-0">
-                          <Input control="age" componentClassName='mb-4'>Idade</Input>
+                          <Input control="age" componentClassName='mb-4' placeholder='Ex: 22'>Idade*</Input>
                           <Select
                             control="gender"
                             options={[
@@ -191,13 +191,13 @@ const FormGenerateDiet = (props: any) => {
                               </a>
                             }
                           >
-                            Sexo
+                            Sexo*
                           </Select>
                         </div>
                       </div>
 
                       <Select
-                        control="objective"
+                        control="biotype"
                         options={[
                           { value: "", label: "Selecione uma opção" }, 
                           { value: "Ectomorfo", label: "Ectomorfo" },
@@ -215,7 +215,7 @@ const FormGenerateDiet = (props: any) => {
                         }
                         componentClassName='mb-4'
                       >
-                        Biotipo
+                        Biotipo*
                       </Select>
                     </div>
 
@@ -252,12 +252,12 @@ const FormGenerateDiet = (props: any) => {
                         ]}
                         componentClassName='mb-4'
                       >
-                        Frequência de atividade física
+                        Frequência de atividade física*
                       </Select>
-                      <Input control="foodRestriction" componentClassName='mb-4'>
+                      <Input control="foodRestriction" componentClassName='mb-4' placeholder='Comidas para não inserir na dieta'>
                         Restrições alimentares
                       </Input>
-                      <Input control="indispensableFoods" componentClassName='mb-4'>
+                      <Input control="indispensableFoods" componentClassName='mb-4' placeholder='Comidas que não podem faltar'>
                         Comidas indispensáveis
                       </Input>
                       <Select
@@ -278,9 +278,9 @@ const FormGenerateDiet = (props: any) => {
                         ]}
                         componentClassName='mb-4 xl:mb-10'
                       >
-                        Objetivo
+                        Objetivo*
                       </Select>
-                      <Input control="lives" componentClassName='mb-4'>País de moradia</Input>
+                      <Input control="lives" componentClassName='mb-4' placeholder='Ex: Brasil'>País de moradia*</Input>
                     </div>
                   </div>
                   <div className="flex items-center mb-4 pt-3">
