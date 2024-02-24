@@ -44,34 +44,40 @@ const AllDiets = () => {
     });
   }, [AllDiets]);
 
-  const deleteDiet = (id: any, showErrorToast: boolean = true) => {
-    setDisableDeleteButton(true)
-      deleteDietById(id).then(() => getAllDiets().then((diets: any) => {
-        const parsedDiets: any = [];
-        diets.map((diet: any) => {
-          try {
-            const parsedDietData = JSON.parse(diet.dietData);
-            diet.dietData = parsedDietData;
-            parsedDiets.push(diet);
-            sucessToast()
-          } catch (err) {
-            errorToast(diet)
-            console.log("Erro ao renderizar dieta ");
-          }
-          setDietData(parsedDiets);
+
+
+    const deleteDiet = async (id: any, showErrorToast: boolean = true) => {
+      setDisableDeleteButton(true)
+        deleteDietById(id).then(async () => {
           setDisableDeleteButton(false)
-        });
-      })).catch((error) => {
-        if(showErrorToast){
-          errorToast(id)
-        }
-        console.error(error)
-        setDisableDeleteButton(false)
-      })
-
-
+          await getAllDiets()
+          .then((diets: any) => {
+            const parsedDiets: any = [];
+            if(!diets.length){
+              sucessToast()
+              setDietData(parsedDiets)
+              setDisableDeleteButton(false)
+            }
+            diets.map((diet: any) => {
+              try {
+                const parsedDietData = JSON.parse(diet.dietData);
+                diet.dietData = parsedDietData;
+                parsedDiets.push(diet);
+                console.log('deletado com sucesso')
+                sucessToast()
+                setDisableDeleteButton(false)
+              } catch (err) {
+                errorToast(diet)
+                console.log("Erro ao renderizar dieta ");
+                deleteDiet(diet.id)
+              }
+              setDietData(parsedDiets);
+              setDisableDeleteButton(false)
+            });
+          })
   
-  }
+    
+      })}
 
   const sucessToast = () => {
     toast({
