@@ -9,10 +9,12 @@ import { Toaster } from "@/components/ui/toaster";
 import { useToast } from "./ui/use-toast";
 import { ToastAction } from "./ui/toast";
 import LoadingDiet from "./LoadingDiet";
+import { useDietContext } from "@/context/dietContext";
 
 const FormGenerateDiet = (props: any) => {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
+  const { getAllDiets } = useDietContext();
   const initialValues = {
     dietName: "",
     username: "",
@@ -127,6 +129,7 @@ const FormGenerateDiet = (props: any) => {
     try {
       await postDiet(dietPayload).then(() => {
         sucessToast();
+        getAllDiets();
       });
     } catch (error) {
       if (showErrorToast) {

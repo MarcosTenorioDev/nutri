@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import FormGenerateDiet from "../FormGenerateDiet";
 import { TableHeadCell } from "../dietsTable/TableCells";
 import { PlusIcon } from "@heroicons/react/24/solid";
-import { deleteDietById, getAllDiets } from "@/services/diet.services";
+import { deleteDietById } from "@/services/diet.services";
 import { TrashIcon } from "@heroicons/react/24/solid";
 import {
   AlertDialog,
@@ -18,18 +18,19 @@ import {
 import { ToastAction } from "../ui/toast";
 import { toast } from "../ui/use-toast";
 import ModalTable from "../dietsTable/modalDiet";
+import { useDietContext } from "@/context/dietContext";
 
 const AllDiets = () => {
   const [dietData, setDietData]: any = useState([]);
   const [disableDeleteButton, setDisableDeleteButton] = useState(false)
+  const { getAllDiets, diets } = useDietContext();
 
   useEffect(() => {
-    getAllDiets().then((diets: any) => {
+     getAllDiets().then((dietsResult: any) => {
       const parsedDiets: any = [];
-      diets.map((diet: any) => {
+      dietsResult.map((diet: any) => {
         try {
           const parsedDietData = JSON.parse(diet.dietData);
-          console.log(parsedDietData)
           diet.dietData = parsedDietData;
           parsedDiets.push(diet);
         } catch (err) {
@@ -44,9 +45,28 @@ const AllDiets = () => {
     });
   }, [AllDiets]);
 
+  useEffect(() => {
+    const parsedDiets: any = [];
+    diets.map((diet: any) => {
+      try {
+        if(diet.dietData.IngestaoDiaria){
+          parsedDiets.push(diet);
+          return
+        }
+        const parsedDietData = JSON.parse(diet.dietData);
+          diet.dietData = parsedDietData;
+          parsedDiets.push(diet);
+      } catch (err) {
+        console.log("dieta deu erro");
+        console.error(err)
+      }
+    });
+    setDietData(parsedDiets);
+ }, [AllDiets, diets]);
 
 
-    const deleteDiet = async (id: any, showErrorToast: boolean = true) => {
+
+    const deleteDiet = async (id: any) => {
       setDisableDeleteButton(true)
         deleteDietById(id).then(async () => {
           setDisableDeleteButton(false)
@@ -97,7 +117,7 @@ const AllDiets = () => {
         <ToastAction
           altText="Tente novamente"
           onClick={() => {
-            deleteDiet(id, false)
+            deleteDiet(id)
           }}
         >
           Tente novamente
