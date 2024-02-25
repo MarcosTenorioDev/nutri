@@ -82,7 +82,7 @@ const Plans = () => {
               <li className="flex items-center space-x-3">
                 <CheckCircleIcon className="min-w-6 max-w-6 text-primary" />
                 <span className="text-sm sm:text-base">
-                  Crie até 10 dietas
+                  Crie dietas ilimitadas
                 </span>
               </li>
               <li className="flex items-center space-x-3">

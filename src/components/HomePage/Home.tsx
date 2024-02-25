@@ -6,6 +6,8 @@ import foodFreezer from "../../assets/images/foodInFreezer.png";
 import foodResult from "../../assets/images/foodResult.png";
 import DietTable from "../dietsTable/dietsTable";
 import Plans from "../Plans";
+import { SignedOut, SignedIn, SignInButton } from "@clerk/clerk-react";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const jsonExample = {
@@ -127,12 +129,26 @@ const Home = () => {
             </h2>
           </div>
         </div>
-        <Button
-          variant={"default"}
-          className="w-40 p-5 text-md rounded-lg lg:p-7 lg:text-xl"
-        >
-          Gerar dieta
-        </Button>
+        <SignedIn>
+          <Link to={"/diets"}>
+            <Button
+              variant={"default"}
+              className="w-40 p-5 text-md rounded-lg lg:p-7 lg:text-xl"
+            >
+              logado
+            </Button>
+          </Link>
+        </SignedIn>
+        <SignedOut>
+          <SignInButton mode="modal">
+            <Button
+              variant={"default"}
+              className="w-40 p-5 text-md rounded-lg lg:p-7 lg:text-xl"
+            >
+              Gerar dieta
+            </Button>
+          </SignInButton>
+        </SignedOut>
       </div>
 
       <div className="px-4 mb-10">
@@ -229,16 +245,16 @@ const Home = () => {
         </div>
       </div>
 
-    <div className="mt-16 max-w-7xl mx-auto text-center sm:text-start px-4 sm:px-12">
-    <h2 className="font-primary text-3xl textPurple font-bold">
-      Planos e Preços
-    </h2>
-    <p className="font-primary textPurple opacity-70">
-      Veja agora os melhores planos para o seu objetivo !
-    </p>
-    </div>
+      <div className="mt-16 max-w-7xl mx-auto text-center sm:text-start px-4 sm:px-12">
+        <h2 className="font-primary text-3xl textPurple font-bold">
+          Planos e Preços
+        </h2>
+        <p className="font-primary textPurple opacity-70">
+          Veja agora os melhores planos para o seu objetivo !
+        </p>
+      </div>
 
-      <Plans/>
+      <Plans />
     </>
   );
 };
