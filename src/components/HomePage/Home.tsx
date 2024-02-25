@@ -135,7 +135,7 @@ const Home = () => {
               variant={"default"}
               className="w-40 p-5 text-md rounded-lg lg:p-7 lg:text-xl"
             >
-              logado
+              Gerar dieta
             </Button>
           </Link>
         </SignedIn>
