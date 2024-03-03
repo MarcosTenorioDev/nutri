@@ -4,6 +4,7 @@ import { environment } from "../environment"
 
 export type userContext = {
     userIsPaid(): Promise<boolean>
+    getUserEmail(): Promise<string>
 }
 
 
@@ -35,6 +36,35 @@ export const userContext = createContext<userContext>({
         } catch (error : any) {
             console.error("Error verifying user payment status:", error?.response?.data?.message);
             return false
+        }
+    },
+    async getUserEmail():Promise<string> {
+
+        const cookies = document.cookie;
+
+        const getCookie = (name: string) => {
+            const value = `; ${cookies}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop()?.split(';').shift();
+        }
+
+        const token = getCookie('__session');
+
+        if(!token){
+            return ''
+        }
+
+        try {
+            const response : AxiosResponse = await axios.get(`${environment.api}/users/userEmail`, {
+                headers: {
+                    Authorization: `${token}`
+                }
+            });
+            return response.data.email
+
+        } catch (error : any) {
+            console.error("Error verifying user email", error?.response?.data?.message);
+            return ''
         }
     },
 })

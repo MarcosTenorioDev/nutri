@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import Home from "./components/HomePage/Home";
 import DietsPage from "./components/DietsPage/DietsPage";
+import '@stripe/stripe-js'
 
  function App () {
 
