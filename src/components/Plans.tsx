@@ -8,8 +8,6 @@ import {
 import { useEffect, useState } from "react";
 import { SignInButton, SignedIn, SignedOut } from "@clerk/clerk-react";
 import { useGlobalContext } from "@/context/userContext";
-import { Toaster } from "./ui/toaster";
-import { toast } from "./ui/use-toast";
 
 //mudar para chave pk de produção
 const Plans = () => {
@@ -51,20 +49,22 @@ const Plans = () => {
     customerEmail: userEmail,
   };
 
-  const errorToast = () => {
-    toast({
-      variant: "destructive",
-      title: "Oops... parece que temos um problema.",
-      description:
-        "Oops... houver um erro ao fazer sua solicitação de compra, por favor, tente novamente."
-    });
-  };
-
   const redirectToCheckout = async () => {
     if(!userEmail){
-      getUserEmail().then((email: string) => {
-        setUserEmail(email)
-        errorToast();
+      getUserEmail().then(async (email: string) => {
+        setLoading(true);
+        const checkoutOptions: RedirectToCheckoutClientOptions = {
+          lineItems: [item],
+          mode: "payment",
+          successUrl: `${window.location.origin}/success`,
+          cancelUrl: `${window.location.origin}`,
+          customerEmail: email,
+        };
+
+        const stripe: Stripe = await getStripe();
+        const { error } = await stripe.redirectToCheckout(checkoutOptions);
+        setLoading(false);
+        console.log("Stripe checkout error ", error);
       });
       return
     }
@@ -76,8 +76,7 @@ const Plans = () => {
     console.log("Stripe checkout error ", error);
   };
 
-  return (<>
-   <Toaster />
+  return (
     <div className="py-4 max-w-7xl mx-auto text-center sm:text-start px-4 sm:px-12">
       <section className="h-full w-full bg-gray-500 rounded-3xl bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-10 shadow-lg mt-8">
         <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
@@ -203,7 +202,6 @@ const Plans = () => {
         </div>
       </section>
     </div>
-  </>
    
   );
 };
