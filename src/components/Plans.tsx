@@ -136,7 +136,7 @@ const Plans = () => {
                 </SignedIn>
 
                 <SignedOut>
-                  <SignInButton>
+                  <SignInButton mode="modal">
                     <Button variant={"default"}
                     className="w-44 shadow-lg text-sm sm:text-md">Vamos lá!</Button>
                   </SignInButton>

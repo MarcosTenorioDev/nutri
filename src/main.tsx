@@ -13,21 +13,19 @@ if (!clerkPubKey) {
 }
 const ClerkWithRoutes = () => {
   const navigate = useNavigate();
-  const { userIsPaid, getUserEmail} = useGlobalContext();
+  const { userIsPaid, getUserEmail } = useGlobalContext();
   return (
     <ClerkProvider
       publishableKey={clerkPubKey}
       navigate={(to: any) => navigate(to)}
       appearance={{
-        variables: { colorPrimary: 'green' },
+        variables: { colorPrimary: "green" },
       }}
     >
       <userContext.Provider value={{ userIsPaid, getUserEmail }}>
         <DietProvider>
-        <App />
+          <App />
         </DietProvider>
-        
-        
       </userContext.Provider>
     </ClerkProvider>
   );
