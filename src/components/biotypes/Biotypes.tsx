@@ -5,7 +5,7 @@ const Biotypes = () => {
     <div className="bg-nutriBlue w-screen p-5">
       <div className="bg-[#03A65A] bg-opacity-25 p-5 flex flex-col items-center min-h-screen lg:gap-0">
         <div className=" flex flex-col justify-center max-w-7xl lg:w-full">
-          <h1 className="text-primary text-black text-2xl font-normal pt-2 mb-8">
+          <h1 className="text-black text-2xl font-normal pt-2 mb-8">
             Biotipos
           </h1>
           <div className="lg:flex lg:gap-5">
