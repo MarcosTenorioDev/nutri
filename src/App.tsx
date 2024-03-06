@@ -5,6 +5,7 @@ import Home from "./components/HomePage/Home";
 import DietsPage from "./components/DietsPage/DietsPage";
 import "@stripe/stripe-js";
 import Success from "./components/successPage/Success";
+import Biotypes from "./components/biotypes/Biotypes";
 function App() {
   return (
     <div className="bg-nutriBlue min-h-screen">
@@ -36,6 +37,7 @@ function App() {
           element={<SignUp redirectUrl={"/"} routing="path" path="/sign-up" />}
         />
         <Route path="/success" element={<Success />} />
+        <Route path="/biotypes" element={<><NavBar /><Biotypes /></>} />
       </Routes>
     </div>
   );

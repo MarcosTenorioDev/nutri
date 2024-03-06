@@ -211,7 +211,8 @@ const FormGenerateDiet = (props: any) => {
                         info={
                           <a
                             className="text-muted-foreground underline text-xs"
-                            href=""
+                            href="/biotypes"
+                            target="blank"
                           >
                             Qual o meu biotipo ?
                           </a>
