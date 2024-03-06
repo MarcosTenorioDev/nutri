@@ -169,8 +169,8 @@ const FormGenerateDiet = (props: any) => {
                 <Form className="flex flex-col w-full p-2">
                   <div className="w-full flex flex-col xl:flex-row xl:gap-6">
                     <div className="w-full xl:w-6/12 flex flex-col justify-between">
-                      <Input control="dietName" componentClassName='mb-4' placeholder='Ex: Marcos Hipertrofia' >Nome da dieta*</Input>
-                      <Input control="username" componentClassName='mb-4' placeholder='Insira seu nome'>Nome de usuário*</Input>
+                      <Input control="dietName" placeholder='Ex: Marcos Hipertrofia' >Nome da dieta*</Input>
+                      <Input control="username"  placeholder='Insira seu nome'>Nome de usuário*</Input>
                       <div className="flex gap-0 justify-between">
                         <div className="w-5/12 flex flex-col gap-0">
                           <Input control="height" componentClassName='mb-4' placeholder='Ex: 170'>Altura em CM*</Input>
@@ -185,14 +185,6 @@ const FormGenerateDiet = (props: any) => {
                               { value: "Masculino", label: "Masculino" },
                               { value: "Feminino", label: "Feminino" },
                             ]}
-                            info={
-                              <a
-                                className="text-muted-foreground underline text-xs"
-                                href=""
-                              >
-                                Porquê precisamos saber?
-                              </a>
-                            }
                           >
                             Sexo*
                           </Select>
@@ -217,13 +209,12 @@ const FormGenerateDiet = (props: any) => {
                             Qual o meu biotipo ?
                           </a>
                         }
-                        componentClassName='mb-4'
                       >
                         Biotipo*
                       </Select>
                     </div>
 
-                    <div className="w-full xl:w-6/12">
+                    <div className="w-full xl:w-6/12 flex flex-col gap-4">
                       {" "}
                       <Select
                         control="activityFrequence"
@@ -280,7 +271,6 @@ const FormGenerateDiet = (props: any) => {
                             label: "Manutenção da saúde",
                           },
                         ]}
-                        componentClassName='mb-4 xl:mb-10'
                       >
                         Objetivo*
                       </Select>

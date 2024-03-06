@@ -42,7 +42,7 @@ const CheckboxUserTerms = (props: any) => {
       />
       <p>
                   Li e aceito os{" "}
-                  <a href="" className="font-semibold underline">
+                  <a href="/terms" target="blank" className="font-semibold underline">
                     termos de uso e condições
                   </a>
                 </p>

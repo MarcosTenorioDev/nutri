@@ -6,6 +6,7 @@ import DietsPage from "./components/DietsPage/DietsPage";
 import "@stripe/stripe-js";
 import Success from "./components/successPage/Success";
 import Biotypes from "./components/biotypes/Biotypes";
+import TermsAndConditions from "./components/termsAndConditions/TermsAndConditions";
 function App() {
   return (
     <div className="bg-nutriBlue min-h-screen">
@@ -38,6 +39,8 @@ function App() {
         />
         <Route path="/success" element={<Success />} />
         <Route path="/biotypes" element={<><NavBar /><Biotypes /></>} />
+        <Route path="/terms" element={<><NavBar /><TermsAndConditions /></>} />
+
       </Routes>
     </div>
   );
