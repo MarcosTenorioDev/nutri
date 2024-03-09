@@ -28,7 +28,7 @@ const Plans = () => {
   const getStripe = () => {
     if (!stripePromise) {
       stripePromise = loadStripe(
-        "pk_test_51OYF2NBye4v8jfuLpwooJq7S4IVUDTvzm2ZYW5PQGglCkPsYQYSP5DFHsvUcG37MFJjcC8cfNiWbosjCtQ00tF8X00mdn6mVxw"
+        "pk_live_51OYF2NBye4v8jfuLR3HawGoJUdBMql7Den8TpDSZaFUraw8TNcOLctSTNNifBwZWpvDjbu9KgLEPqIqDn39z0KUU00YryohVsp"
       );
     }
 
@@ -36,7 +36,7 @@ const Plans = () => {
   };
 
   const item = {
-    price: "price_1OpyiyBye4v8jfuLIWn2kdUw",
+    price: "price_1OsFd9Bye4v8jfuLyODve9pN",
     quantity: 1,
   };
   //TODO:
