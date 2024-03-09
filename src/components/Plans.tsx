@@ -36,7 +36,7 @@ const Plans = () => {
   };
 
   const item = {
-    price: "price_1OsFd9Bye4v8jfuLyODve9pN",
+    price: "price_1OsG6BBye4v8jfuL57ZpUHm2",
     quantity: 1,
   };
   //TODO:
