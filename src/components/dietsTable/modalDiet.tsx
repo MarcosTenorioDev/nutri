@@ -1,4 +1,4 @@
-import { Key, useState } from "react";
+import { Key, useRef, useState } from "react";
 import { TableHeadCell, TableBodyCell } from "./TableCells";
 import {
   TableCellsIcon,
@@ -6,18 +6,77 @@ import {
 } from "@heroicons/react/24/solid";
 import { Button } from "../ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import html2canvas from 'html2canvas'
+import jsPDF from 'jspdf'
 
 const ModalTable = (props: any) => {
   const text = `Olá, -span-, Aqui está sua dieta com objetivo em ganho de massa muscular. espero que goste!`;
 
   const [dietData] = useState(props.diet.dietData || undefined);
 
+  const pdfRef = useRef<HTMLDivElement>(null);
+  const buttonsRef = useRef<HTMLDivElement>(null);
+
+  const downloadPDFDiet = () => {
+    const input = pdfRef.current;
+    const buttonsBox = buttonsRef.current
+  
+    if (!input) {
+      return;
+    }
+    if(!buttonsBox){
+      return
+    }
+
+    const buttonInsideInput = input.querySelector('button');
+    if (buttonInsideInput) console.log('Botão encontrado:', buttonInsideInput);
+  
+    // Salvando os estilos originais
+    const originalStyles = {
+      overflow: input.style.overflow,
+      width: input.style.width,
+      height: input.style.height,
+      displayButtons: buttonsBox.style.display
+    };
+  
+    // Configurando o elemento para simular uma tela grande
+    input.style.overflow = 'visible';
+    input.style.width = '1920px';
+    input.style.height = '1080px';
+    buttonsBox.style.display= 'none';
+  
+    html2canvas(input, {scale: 1, windowWidth: 1920, windowHeight: 1080}).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+  
+      const pdf = new jsPDF({
+        orientation: "landscape",
+        unit: "px",
+        format: [1920, 1080],
+      });
+  
+      pdf.addImage(imgData, "PNG", 0, 0, 1920, 1080);
+      pdf.save("diet.pdf");
+  
+      // Restaurando os estilos originais após a criação do PDF
+      input.style.overflow = originalStyles.overflow;
+      input.style.width = originalStyles.width;
+      input.style.height = originalStyles.height;
+      buttonsBox.style.display= originalStyles.displayButtons;
+
+    });
+  };
+  
+  
+  
+
+  
+
   return (
     <Dialog>
     <DialogTrigger className="bg-primary text-primary-foreground shadow hover:bg-primary/90 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 p-2 px-4">
         Ver dieta
     </DialogTrigger>
-      <DialogContent className="flex items-start justify-start w-10/12 max-w-[1680px] max-h-[95%] p-0 overflow-scroll order-[2px] border-primary rounded-2xl mx-auto px-4 md:px-10 bg-nutriBlue py-5 flex-col">
+      <DialogContent className="flex items-start justify-start w-10/12 max-w-[1680px] max-h-[95%] p-0 overflow-scroll order-[2px] border-primary rounded-2xl mx-auto px-4 md:px-10 bg-nutriBlue py-5 flex-col" ref={pdfRef}>
           <header className="flex justify-between items-center border[#7A7A7A] border-b-2 mb-3 px-5 pb-5 w-full">
             <h2 className="text-primary text-xl font-secondary font-normal tracking-wider sm:text-2xl lg:text-3xl">
               NUTRI.IO
@@ -86,13 +145,13 @@ const ModalTable = (props: any) => {
                 </li>
               </ul>
             </div>
-            <div className="text-center sm:text-start">
+            <div className="text-center sm:text-start" ref={buttonsRef}>
               <h3 className="font-secondary text-md py-3 font-semibold mb-3 border-t-2 sm:border-t-0 md:text-lg lg:text-xl">
                 Faça download da dieta:{" "}
               </h3>
               <div className="flex justify-center gap-4">
-                <Button className="flex gap-2 text-md">
-                  PDF <DocumentIcon className="w-6" />
+                <Button className="flex gap-2 text-md" onClick={downloadPDFDiet}>
+                  PDF <DocumentIcon className="w-6"/>
                 </Button>
                 <Button className="flex gap-2 text-md">
                   CSV <TableCellsIcon className="w-6" />

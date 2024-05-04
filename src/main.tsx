@@ -7,7 +7,7 @@ import { BrowserRouter, useNavigate } from "react-router-dom";
 import { userContext, useGlobalContext } from "./context/userContext";
 import { DietProvider } from "./context/dietContext.tsx";
 
-const clerkPubKey = "pk_live_Y2xlcmsubnV0cmktaW8uY29tJA";
+const clerkPubKey = "pk_test_ZGFzaGluZy1za3Vuay0xOS5jbGVyay5hY2NvdW50cy5kZXYk";
 if (!clerkPubKey) {
   throw new Error("Missing Publishable Key");
 }

@@ -1,3 +1,3 @@
 export const environment = {
-    api: 'https://nutri-backend-d220420b36f8.herokuapp.com'
+    api: 'http://localhost:3000'
 }
