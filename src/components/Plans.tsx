@@ -28,7 +28,7 @@ const Plans = () => {
   const getStripe = () => {
     if (!stripePromise) {
       stripePromise = loadStripe(
-        "pk_live_51OYF2NBye4v8jfuLR3HawGoJUdBMql7Den8TpDSZaFUraw8TNcOLctSTNNifBwZWpvDjbu9KgLEPqIqDn39z0KUU00YryohVsp"
+        import.meta.env.VITE_STRIPE_PK
       );
     }
 
